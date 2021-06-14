@@ -33,7 +33,11 @@ public class MVCActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mvc);
         setTitle("MVC Activity");
 
+        controller = new CountriesController(this);
+
         list = findViewById(R.id.list);
+        retryButton = findViewById(R.id.retryButton);
+        progress = findViewById(R.id.progress);
         adapter = new ArrayAdapter<>(this, R.layout.row_layout, R.id.listText, listValues);
 
         list.setAdapter(adapter);
@@ -45,7 +49,7 @@ public class MVCActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<String> vals = new ArrayList<>();
+        /*ArrayList<String> vals = new ArrayList<>();
         vals.add("USA");
         vals.add("Canada");
         vals.add("Brazil");
@@ -55,14 +59,31 @@ public class MVCActivity extends AppCompatActivity {
         vals.add("USA");
         vals.add("Canada");
         vals.add("Brazil");
-        setValues(vals);
+        setValues(vals);*/
 
     }
 
-    private void setValues(List<String> values) {
+    public void setValues(List<String> values) {
         listValues.clear();
         listValues.addAll(values);
+        retryButton.setVisibility(View.GONE);
+        progress.setVisibility(View.GONE);
+        list.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
+    }
+
+    public void onRetry(View view) {
+        controller.onRefresh();
+        list.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        progress.setVisibility(View.VISIBLE);
+    }
+
+    public void onError() {
+        Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show();
+        progress.setVisibility(View.GONE);
+        list.setVisibility(View.GONE);
+        retryButton.setVisibility(View.VISIBLE);
     }
 
 
