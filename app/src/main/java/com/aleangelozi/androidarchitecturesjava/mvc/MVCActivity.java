@@ -48,19 +48,6 @@ public class MVCActivity extends AppCompatActivity {
                         listValues.get(position), Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*ArrayList<String> vals = new ArrayList<>();
-        vals.add("USA");
-        vals.add("Canada");
-        vals.add("Brazil");
-        vals.add("USA");
-        vals.add("Canada");
-        vals.add("Brazil");
-        vals.add("USA");
-        vals.add("Canada");
-        vals.add("Brazil");
-        setValues(vals);*/
-
     }
 
     public void setValues(List<String> values) {
